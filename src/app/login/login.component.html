@@ -1,0 +1,103 @@
+<div class="flex w-full h-screen">
+  <!-- Left Panel -->
+  <div class="relative flex justify-center items-center bg-[#03459C] shadow-[11px_0px_10.2px_-1px_rgba(0,0,0,0.25)] p-4 min-w-[32%]">
+    <img src="assets/almanara-w 1.png" alt="Company Logo" class="top-[15%] absolute w-1/2">
+    <div class="z-[2] -mt-[100px] text-white">
+      <h1 class="mx-auto w-[70%] font-[600] text-[39.06px] text-center leading-[46.87px]">Partnership for Business Growth</h1>
+      <p class="mx-auto w-[80%] text-[#BDBDBD] text-center leading-[28.16px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun.</p>
+    </div>
+    <img src="assets/Mask group.png" alt="Mask group Logo" class="bottom-0 absolute w-full h-[95%] object-cover">
+  </div>
+  
+  <!-- Right Panel -->
+  <div class="relative flex justify-center items-center p-4 w-full">
+    <div class="bg-white p-8 rounded w-[50%]">
+      <h2 class="mb-3 font-bold text-[#212121] text-2xl text-center">WELCOME BACK EXCLUSIVE MEMBER</h2>
+      <h2 class="mb-9 text-[#424242] text-center">LOG IN TO CONTINUE</h2>
+      
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <div class="mb-3">
+          <div class="relative">
+            <img class="top-[50%] left-[20px] absolute text-lg translate-y-[-50%]" src="assets/icon-mail.svg" alt="email-logo" />
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email" 
+              (blur)="loginForm.get('email')?.markAsTouched()"
+              class="p-2 pr-15 pl-12 border-[2px] border-[rgba(0,0,0,0.4)] rounded-[16px] focus:outline-none focus:ring-2 focus:ring-blue-600 w-full h-[54.5px]"
+              placeholder="example@email.com"
+            >
+          </div>
+          <div 
+            *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" 
+            class="mt-1 text-red-500 text-sm"
+          >
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format</span>
+          </div>
+        </div>
+  
+        <!-- Password Field -->
+        <div class="mb-4">
+          <div class="relative">
+            <img class="top-[50%] left-[20px] absolute text-lg translate-y-[-50%]" src="assets/lock.svg" alt="password-logo" />
+            <input 
+              [type]="showPassword ? 'text' : 'password'"
+              id="password" 
+              formControlName="password" 
+              (blur)="loginForm.get('password')?.markAsTouched()"
+              class="p-2 pr-15 pl-12 border-[2px] border-[rgba(0,0,0,0.4)] rounded-[16px] focus:outline-none focus:ring-2 focus:ring-blue-600 w-full h-[54.5px]"
+              placeholder="password"
+            >
+              <!-- Show/Hide Button -->
+              <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="top-[50%] right-[20px] absolute text-[rgba(158,158,158,1)] text-xs translate-y-[-50%]"
+              >
+              {{ showPassword ? 'HIDE' : 'SHOW' }}
+            </button>
+          </div>
+          <div 
+            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" 
+            class="mt-1 text-red-500 text-sm"
+          >
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</span>
+            <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+          </div>
+        </div>
+      
+          <!-- Success Message -->
+          <div *ngIf="showSuccess" class="mb-4 text-green-500 text-center">
+            Login successful!
+          </div>
+          
+          <!-- Error Message -->
+          <div *ngIf="showError" class="mb-4 text-red-500 text-center">
+            {{ errorMessage }}
+          </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center items-center">
+          <button 
+          type="submit" 
+          [disabled]="loginForm.invalid || isLoading" 
+          class="flex justify-between items-center bg-[rgba(255,128,0,1)] disabled:bg-gray-400 mx-auto p-2 px-5 rounded-[16px] focus:outline-none focus:ring-2 focus:ring-blue-600 w-[90%] h-[52px] text-white hover:scale-110 disabled:hover:scale-100 transition duration-300 ease-in-out cursor-pointer disabled:cursor-not-allowed"
+        >
+          <span class="font-[500]">{{ isLoading ? 'Logging in...' : 'Proceed to my Account' }}</span>
+          <i class="fa-arrow-right fa-solid"></i>
+        </button>
+        
+        </div>
+      </form>
+    </div>
+
+    <!-- Copyright -->
+    <div class="bottom-[20px] absolute">
+      <p class="text-[rgba(158,158,158,1)] text-sm tracking-[-0.5px]">Copyright 2024 - 2025 Almanara. All rights Reserved</p>
+    </div>
+
+  </div>
+</div>
